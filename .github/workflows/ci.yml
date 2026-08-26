@@ -90,6 +90,7 @@ jobs:
         with:
           name: distributions
           path: .build-a/*
+          include-hidden-files: true
           if-no-files-found: error
 
   real-s3-conformance:
