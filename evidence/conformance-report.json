@@ -1,0 +1,101 @@
+{
+  "checks": [
+    {
+      "name": "authenticated-health-and-versioning",
+      "passed": true
+    },
+    {
+      "name": "multipart-upload",
+      "passed": true
+    },
+    {
+      "name": "verified-inclusive-range",
+      "passed": true
+    },
+    {
+      "name": "portable-metadata-mapping",
+      "passed": true
+    },
+    {
+      "name": "streaming-full-digest",
+      "passed": true
+    },
+    {
+      "name": "not-found-normalization",
+      "passed": true
+    },
+    {
+      "mode": "COMPLIANCE",
+      "name": "object-lock-retention",
+      "passed": true
+    },
+    {
+      "name": "retention-failure-normalization",
+      "passed": true
+    }
+  ],
+  "engine": {
+    "imageDigest": "sha256:a1ea29fa28355559ef137d71fc570e508a214ec84ff8083e39bc5428980b015e",
+    "name": "MinIO",
+    "release": "RELEASE.2025-04-22T22-12-26Z"
+  },
+  "fingerprint": "sha256:677ce030c28e71137d69d5f65cf7b8e0e7e838c0edce656c9e46f2d656c75578",
+  "formatVersion": "meridian.s3-conformance-evidence.v1",
+  "objectCommon": {
+    "checks": [
+      {
+        "detail": "ok",
+        "name": "unknown-length-streaming-put",
+        "passed": true
+      },
+      {
+        "detail": "ok",
+        "name": "stat-content-identity",
+        "passed": true
+      },
+      {
+        "detail": "ok",
+        "name": "streaming-get",
+        "passed": true
+      },
+      {
+        "detail": "ok",
+        "name": "inclusive-range-read",
+        "passed": true
+      },
+      {
+        "detail": "ok",
+        "name": "bounded-prefix-list",
+        "passed": true
+      },
+      {
+        "detail": "ConditionalConflict",
+        "name": "conditional-create-conflict",
+        "passed": true
+      },
+      {
+        "detail": "DigestMismatch",
+        "name": "digest-mismatch",
+        "passed": true
+      },
+      {
+        "detail": "ok",
+        "name": "exact-version-delete",
+        "passed": true
+      },
+      {
+        "detail": "ObjectNotFound",
+        "name": "missing-object",
+        "passed": true
+      }
+    ],
+    "fingerprint": "sha256:b2cc66efd1c01d157b8c01da7f64983cc68f48b3cb1c6b23b77907e9cf353689",
+    "formatVersion": "meridian.object-conformance-report.v1",
+    "passed": true,
+    "targetId": "s3"
+  },
+  "package": {
+    "name": "meridian-storage-s3",
+    "version": "1.0.0"
+  }
+}

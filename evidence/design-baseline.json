@@ -1,0 +1,26 @@
+{
+  "contract": {
+    "adapterContractVersion": "1.0.0",
+    "catalog": "object",
+    "objectCommonDistribution": "meridian-storage-object-common",
+    "objectCommonVersion": "1.0.0",
+    "objectCommonWheelSha256": "62d838ab872a933d5c9f51b30de7389786400f49ed9f006b0cbab07fb67fce36",
+    "operationVersion": "1.0.0"
+  },
+  "designRevisions": {
+    "catalogsAndPublicInterfaces": 70,
+    "engineAdapters": 24,
+    "meridianConstructsLld": 45,
+    "meridianHld": 56,
+    "objectAdapterLld": 12
+  },
+  "fingerprint": "sha256:349b12a7e20ac376cf7d4067ab1d79e85bfcefa99170b48f707a0ce7e9e15a8e",
+  "formatVersion": "meridian.s3-design-baseline.v1",
+  "scope": {
+    "adapterId": "s3",
+    "consumerSurface": "mapping-first Object Expressions and serialized Operations",
+    "nativeQuery": false,
+    "presignedUrls": false,
+    "provisioningAuthority": "Platform/Vangu IaC"
+  }
+}
