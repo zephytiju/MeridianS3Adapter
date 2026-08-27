@@ -42,10 +42,10 @@ test = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/zephytiju/meridian-storage-s3"
-Documentation = "https://github.com/zephytiju/meridian-storage-s3#readme"
-Issues = "https://github.com/zephytiju/meridian-storage-s3/issues"
-Repository = "https://github.com/zephytiju/meridian-storage-s3.git"
+Homepage = "https://github.com/zephytiju/MeridianS3Adapter"
+Documentation = "https://github.com/zephytiju/MeridianS3Adapter#readme"
+Issues = "https://github.com/zephytiju/MeridianS3Adapter/issues"
+Repository = "https://github.com/zephytiju/MeridianS3Adapter.git"
 
 [project.entry-points."meridian_storage.adapters"]
 s3 = "meridian_storage.adapters.s3.factory:S3AdapterFactory"
