@@ -127,7 +127,7 @@ def s3_capability_manifest(
         engine_version=config.engine_version,
         extensions={
             "adapterVersion": __version__,
-            "objectCommonVersion": "1.0.0",
+            "objectCommonVersion": "1.0.1",
             "objectLockVerified": object_lock_verified,
             "versioningVerified": versioning_verified,
         },

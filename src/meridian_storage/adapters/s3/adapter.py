@@ -30,6 +30,7 @@ from meridian_storage.object_common import (
     ReferenceSigner,
     ResolvedByteRange,
     SignedObjectReference,
+    default_payload_registry,
     effective_immutability,
     parse_logical_reference,
     parse_object_metadata,
@@ -296,7 +297,7 @@ class S3ObjectAdapter:
     ) -> None:
         self.transport = transport
         self.config = config
-        self.payloads = payloads or PayloadRegistry()
+        self.payloads = default_payload_registry() if payloads is None else payloads
         self.layout = S3Layout(config)
         self.reference_signer = reference_signer
         self.signed_reference_audience = signed_reference_audience

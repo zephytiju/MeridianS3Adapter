@@ -16,6 +16,7 @@ from meridian_storage.object_common import (
     ObjectInvalidRequest,
     PayloadRegistry,
     ReferenceSigner,
+    default_payload_registry,
 )
 from meridian_storage.semantics import JsonValue, sha256_fingerprint
 from meridian_storage.spi import (
@@ -28,6 +29,7 @@ from meridian_storage.spi import (
     PhysicalVerification,
 )
 
+from ._version import __version__
 from .adapter import S3ObjectAdapter
 from .config import S3Config, S3Credentials, credentials_from_secrets
 from .descriptor import S3_ADAPTER_ID
@@ -70,7 +72,7 @@ class S3AdapterSession:
             result_bytes=0,
             provenance={
                 "adapterId": S3_ADAPTER_ID,
-                "adapterVersion": "1.0.0",
+                "adapterVersion": __version__,
                 "capabilityFingerprint": manifest.fingerprint,
                 "engineProfile": manifest.engine_profile,
                 "engineVersion": manifest.engine_version,
@@ -256,7 +258,7 @@ class S3AdapterFactory:
         reference_signer: ReferenceSigner | None = None,
         signed_reference_audience: str | None = None,
     ) -> None:
-        self.payloads = payloads or PayloadRegistry()
+        self.payloads = default_payload_registry() if payloads is None else payloads
         self._client_factory = client_factory or _default_client_factory
         self._reference_signer = reference_signer
         self._signed_reference_audience = signed_reference_audience

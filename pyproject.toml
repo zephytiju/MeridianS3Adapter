@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "meridian-storage-s3"
-version = "1.0.0"
+version = "1.0.1"
 description = "S3 object adapter for the Meridian V1 Object Catalog"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -25,7 +25,7 @@ classifiers = [
 ]
 dependencies = [
   "boto3>=1.40,<2",
-  "meridian-storage-object-common==1.0.0",
+  "meridian-storage-object-common==1.0.1",
 ]
 
 [project.optional-dependencies]
@@ -55,6 +55,7 @@ include = [
   "/src",
   "/tests",
   "/evidence",
+  "/scripts",
   "/CHANGELOG.md",
   "/CONTRIBUTING.md",
   "/LICENSE",
