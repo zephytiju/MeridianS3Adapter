@@ -13,6 +13,8 @@ from meridian_storage.object_common import (
     ObjectCapabilityMismatch,
     ObjectCatalogProvider,
     ObjectInvalidRequest,
+    PayloadRegistry,
+    default_payload_registry,
 )
 from meridian_storage.runtime.config import (
     BindingConfig,
@@ -32,6 +34,17 @@ from meridian_storage import OperationContext, ResourceRef
 from meridian_storage.adapters.s3 import S3AdapterFactory, S3Config, s3_capability_manifest
 
 _FINGERPRINT = "sha256:" + "0" * 64
+
+
+def test_factory_preserves_empty_explicit_registry() -> None:
+    payloads = PayloadRegistry()
+    factory = S3AdapterFactory(payloads=payloads)
+    assert factory.payloads is payloads
+    assert S3AdapterFactory().payloads is default_payload_registry()
+
+
+def test_object_adapter_preserves_empty_explicit_registry(s3_fixture) -> None:
+    assert s3_fixture.adapter.payloads is s3_fixture.payloads
 
 
 def _binding(

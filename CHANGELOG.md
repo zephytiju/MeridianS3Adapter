@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.1
+
+- Use the shared Object Common default payload registry for installed entry-point discovery.
+- Preserve empty explicitly supplied registries in both factory and adapter constructors.
+- Report the actual adapter package version in execution provenance.
+
+
 All notable changes are documented in this file.
 
 ## 1.0.0 - 2026-08-25

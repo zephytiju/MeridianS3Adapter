@@ -98,3 +98,11 @@ design/contract inputs and released Object Common wheel hash are recorded in
 ## License
 
 Apache License 2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
+
+## Payload composition (1.0.1)
+
+Installed S3 discovery uses Object Common’s `default_payload_registry()`. An Object
+consumer using that same default can upload and read through Meridian without
+registering a second S3 factory. Core intentionally rejects injecting `s3` again
+when its installed entry point is present. Explicit SPI compositions may still pass
+`S3AdapterFactory(payloads=registry)`; an empty registry is preserved by identity.
