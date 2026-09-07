@@ -39,7 +39,7 @@
     "name": "MinIO",
     "release": "RELEASE.2025-04-22T22-12-26Z"
   },
-  "fingerprint": "sha256:ada75409fec086044b066c9957d9d5dba195ca2cc358e8323920babc2acc01d4",
+  "fingerprint": "sha256:c4859b382aba9bca13c1d7d79fc56e1cfb9d92e511641cc70b874058da982aac",
   "formatVersion": "meridian.s3-conformance-evidence.v1",
   "objectCommon": {
     "checks": [
@@ -96,6 +96,6 @@
   },
   "package": {
     "name": "meridian-storage-s3",
-    "version": "1.0.1"
+    "version": "1.0.2"
   }
 }

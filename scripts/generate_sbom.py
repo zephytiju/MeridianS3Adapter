@@ -12,7 +12,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 NAME = "meridian-storage-s3"
-VERSION = "1.0.1"
+VERSION = "1.0.2"
 
 
 def sha256(path: Path) -> str:
