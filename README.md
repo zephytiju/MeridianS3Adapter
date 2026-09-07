@@ -1,7 +1,7 @@
 # Meridian Storage S3
 
 `meridian-storage-s3` is the S3-compatible Object Adapter for Meridian V1. It implements
-the released `meridian-storage-object-common==1.0.0` contract behind the `s3` adapter id.
+the released `meridian-storage-object-common==1.0.2` contract behind the `s3` adapter id.
 Consumers continue to use mapping-first `object` Catalog Expressions; bucket names, keys,
 endpoints, credentials, SDK objects, retention controls, and migration state remain private to
 deployment composition and this adapter.
@@ -27,11 +27,12 @@ pre-signed URL. Those authorities remain with Platform or Vangu IaC.
 ## Installation
 
 ```bash
-python -m pip install meridian-storage-s3==1.0.0
+python -m pip install meridian-storage-s3==1.0.2
 ```
 
-Python 3.12 or newer is required. The package pins the released Object Common contract and
-is discovered through the `meridian_storage.adapters` entry-point group.
+Python 3.12 or newer is required. The package pins the released Object Common contract,
+resolving with Core 1.0.1 and Semantics 2.0.0. It is discovered through the
+`meridian_storage.adapters` entry-point group.
 
 ## Deployment configuration
 

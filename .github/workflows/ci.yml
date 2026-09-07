@@ -76,12 +76,16 @@ jobs:
       - name: Smoke-install the wheel and verify discovery
         run: |
           python -m pip install --force-reinstall .build-a/*.whl
+          python -m pip check
           python - <<'PY'
           from importlib.metadata import entry_points, version
           from meridian_storage.adapters.s3 import __version__
 
-          assert version("meridian-storage-s3") == "1.0.1"
-          assert __version__ == "1.0.1"
+          assert version("meridian-storage-s3") == "1.0.2"
+          assert __version__ == "1.0.2"
+          assert version("meridian-storage-object-common") == "1.0.2"
+          assert version("meridian-storage-core") == "1.0.1"
+          assert version("meridian-storage-semantics") == "2.0.0"
           selected = tuple(entry_points(group="meridian_storage.adapters", name="s3"))
           assert len(selected) == 1
           assert selected[0].load().adapter_id == "s3"

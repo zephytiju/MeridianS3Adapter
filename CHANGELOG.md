@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.2
+
+- Consume released Object Common 1.0.2 with Core 1.0.1 and Semantics 2.0.0.
+- Align adapter compatibility metadata, release inputs, and real S3 conformance evidence.
+- Preserve Object operations, shared payload discovery, and provider behavior.
+
 ## 1.0.1
 
 - Use the shared Object Common default payload registry for installed entry-point discovery.
