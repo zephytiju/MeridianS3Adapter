@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.3
+
+- Preserve the S3 API date separately from deployment-selected server releases and unavailable observations.
+- Consume released Core 1.1 SPI and Object Common 1.0.3 through compatible API bounds.
+- Record actual installed package provenance and regenerate deployment manifest expectations.
+- Preserve Object behavior and add real authentication/TLS negatives plus deterministic release provenance fixtures.
+
 ## 1.0.2
 
 - Consume released Object Common 1.0.2 with Core 1.0.1 and Semantics 2.0.0.

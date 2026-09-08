@@ -6,7 +6,9 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+from dataclasses import replace
 from datetime import UTC, datetime, timedelta
+from importlib.metadata import version
 from io import BytesIO
 from pathlib import Path
 from typing import Any, cast
@@ -15,8 +17,11 @@ import boto3
 import pytest
 from meridian_storage.object_common import (
     FactoryPayloadSource,
+    ObjectAuthenticationFailed,
+    ObjectAuthorizationFailed,
     ObjectCatalogProvider,
     ObjectNotFound,
+    ObjectUnavailable,
     PayloadRegistry,
     RetentionDenied,
     run_object_conformance,
@@ -124,6 +129,7 @@ def test_real_minio_conformance_and_deterministic_evidence() -> None:
         integrity_chunk_bytes=64 * 1024,
         max_range_bytes=8 * 1024 * 1024,
         require_versioning=True,
+        selected_server_version=os.environ.get("MERIDIAN_S3_ENGINE_RELEASE"),
     )
     normal_transport = S3Transport(client, normal_config)
     normal_payloads = PayloadRegistry()
@@ -137,6 +143,26 @@ def test_real_minio_conformance_and_deterministic_evidence() -> None:
     common_report.require_success()
     normal_probe, normal_probe_evidence = S3HealthProbe(normal_transport, normal_config).run()
     assert normal_probe_evidence.versioning_enabled
+    assert normal_probe.observed_engine_version is None
+    assert normal_probe.manifest.engine_version == "2006-03-01"
+    for release in ("unlisted-server-build", None):
+        varied, _ = S3HealthProbe(
+            normal_transport, replace(normal_config, selected_server_version=release)
+        ).run()
+        assert varied.manifest.extensions["selectedServerVersion"] == release
+        assert varied.observed_engine_version is None
+    bad_client = _client(endpoint, "invalid-conformance-identity", "invalid-conformance-secret")
+    with pytest.raises((ObjectAuthenticationFailed, ObjectAuthorizationFailed)):
+        S3HealthProbe(S3Transport(bad_client, normal_config), normal_config).run()
+    bad_client.close()
+    # A real TLS handshake against a plaintext listener must fail closed.
+    if endpoint.startswith("http://"):
+        tls_endpoint = endpoint.replace("http://", "https://", 1)
+        tls_config = replace(normal_config, endpoint_url=tls_endpoint, allow_insecure_http=False)
+        tls_client = _client(tls_endpoint, access, secret)
+        with pytest.raises(ObjectUnavailable):
+            S3HealthProbe(S3Transport(tls_client, tls_config), tls_config).run()
+        tls_client.close()
 
     payload = b"m" * (5 * 1024 * 1024) + b"multipart-range-tail"
     metadata = _put(
@@ -284,15 +310,29 @@ def test_real_minio_conformance_and_deterministic_evidence() -> None:
         )
 
     report: dict[str, JsonValue] = {
-        "formatVersion": "meridian.s3-conformance-evidence.v1",
+        "formatVersion": "meridian.s3-conformance-evidence.v2",
         "package": {"name": "meridian-storage-s3", "version": __version__},
         "engine": {
             "name": "MinIO",
-            "release": os.environ.get("MERIDIAN_S3_ENGINE_RELEASE", "RELEASE.2025-04-22T22-12-26Z"),
+            "selectedRelease": os.environ.get("MERIDIAN_S3_ENGINE_RELEASE"),
+            "observedServerRelease": None,
+            "apiContract": "2006-03-01",
+            "observation": "S3 standard API does not expose server release",
             "imageDigest": os.environ.get("MERIDIAN_S3_ENGINE_DIGEST", "unknown"),
+        },
+        "releaseClosure": {
+            name: version(name)
+            for name in (
+                "meridian-storage-core",
+                "meridian-storage-semantics",
+                "meridian-storage-object-common",
+            )
         },
         "objectCommon": cast(JsonValue, common_report.to_dict()),
         "checks": [
+            {"name": "invalid-authentication-rejected", "passed": True},
+            {"name": "tls-handshake-fails-closed", "passed": endpoint.startswith("http://")},
+            {"name": "independent-server-release-metadata", "passed": True},
             {
                 "name": "authenticated-health-and-versioning",
                 "passed": normal_probe.evidence["versioning"] == "Enabled",

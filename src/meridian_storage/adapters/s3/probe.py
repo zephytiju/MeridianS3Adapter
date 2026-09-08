@@ -63,7 +63,12 @@ class S3HealthProbe:
         return (
             AdapterProbe(
                 manifest,
+                # S3 has no standard authenticated server-release operation.
+                # Neither the API date nor deployment settings are observations.
+                observed_engine_version=None,
                 evidence={
+                    "s3ApiContract": self._config.engine_version,
+                    "serverVersionObservation": "unavailable",
                     "authenticated": "true",
                     "bucketAccess": "verified",
                     "checksumHeaders": str(self._config.checksum_headers).lower(),
