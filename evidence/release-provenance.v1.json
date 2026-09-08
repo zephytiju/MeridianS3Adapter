@@ -1,0 +1,430 @@
+[
+  {
+    "fingerprint": "sha256:7145d1d61d2ea05036e6a5e00052a2837408e2c682d8c2ec59ec070815f432bc",
+    "manifest": {
+      "availableOperationContracts": [
+        "meridian.object.create_resource",
+        "meridian.object.delete",
+        "meridian.object.get",
+        "meridian.object.list",
+        "meridian.object.publish_schema",
+        "meridian.object.put",
+        "meridian.object.read_range",
+        "meridian.object.stat"
+      ],
+      "descriptor": {
+        "adapterContractVersion": "1.0.0",
+        "adapterId": "s3",
+        "capabilities": [
+          {
+            "cursorBehavior": "none",
+            "extensions": {
+              "catalog": "object",
+              "provider": "s3"
+            },
+            "guarantees": [],
+            "healthProbes": [
+              "authenticated",
+              "bucket-access"
+            ],
+            "limits": {},
+            "migrationBehavior": "externally-orchestrated-forward",
+            "operationContract": "meridian.object.create_resource",
+            "operationVersions": [
+              "1.0.0"
+            ]
+          },
+          {
+            "cursorBehavior": "none",
+            "extensions": {
+              "catalog": "object",
+              "provider": "s3"
+            },
+            "guarantees": [
+              "object.exact-version-delete"
+            ],
+            "healthProbes": [
+              "authenticated",
+              "bucket-access"
+            ],
+            "limits": {},
+            "migrationBehavior": "externally-orchestrated-forward",
+            "operationContract": "meridian.object.delete",
+            "operationVersions": [
+              "1.0.0"
+            ]
+          },
+          {
+            "cursorBehavior": "none",
+            "extensions": {
+              "catalog": "object",
+              "provider": "s3"
+            },
+            "guarantees": [
+              "object.digest-verification",
+              "object.streaming"
+            ],
+            "healthProbes": [
+              "authenticated",
+              "bucket-access"
+            ],
+            "limits": {},
+            "migrationBehavior": "externally-orchestrated-forward",
+            "operationContract": "meridian.object.get",
+            "operationVersions": [
+              "1.0.0"
+            ]
+          },
+          {
+            "cursorBehavior": "opaque-logical-start-after",
+            "extensions": {
+              "catalog": "object",
+              "provider": "s3"
+            },
+            "guarantees": [
+              "object.bounded-prefix-list"
+            ],
+            "healthProbes": [
+              "authenticated",
+              "bucket-access"
+            ],
+            "limits": {
+              "object.max-list-page-size": 1000
+            },
+            "migrationBehavior": "externally-orchestrated-forward",
+            "operationContract": "meridian.object.list",
+            "operationVersions": [
+              "1.0.0"
+            ]
+          },
+          {
+            "cursorBehavior": "none",
+            "extensions": {
+              "catalog": "object",
+              "provider": "s3"
+            },
+            "guarantees": [],
+            "healthProbes": [
+              "authenticated",
+              "bucket-access"
+            ],
+            "limits": {},
+            "migrationBehavior": "externally-orchestrated-forward",
+            "operationContract": "meridian.object.publish_schema",
+            "operationVersions": [
+              "1.0.0"
+            ]
+          },
+          {
+            "cursorBehavior": "none",
+            "extensions": {
+              "catalog": "object",
+              "provider": "s3"
+            },
+            "guarantees": [
+              "object.conditional-create",
+              "object.digest-sha256",
+              "object.digest-verification",
+              "object.immutability-intent",
+              "object.metadata-after-commit",
+              "object.multipart",
+              "object.retention-intent",
+              "object.streaming"
+            ],
+            "healthProbes": [
+              "authenticated",
+              "bucket-access"
+            ],
+            "limits": {
+              "object.max-multipart-part-bytes": 5368709120,
+              "object.max-multipart-parts": 10000,
+              "object.max-object-bytes": 5497558138880,
+              "object.max-user-metadata-entries": 128
+            },
+            "migrationBehavior": "externally-orchestrated-forward",
+            "operationContract": "meridian.object.put",
+            "operationVersions": [
+              "1.0.0"
+            ]
+          },
+          {
+            "cursorBehavior": "none",
+            "extensions": {
+              "catalog": "object",
+              "provider": "s3"
+            },
+            "guarantees": [
+              "object.digest-verification",
+              "object.range-read"
+            ],
+            "healthProbes": [
+              "authenticated",
+              "bucket-access"
+            ],
+            "limits": {
+              "object.max-range-bytes": 67108864
+            },
+            "migrationBehavior": "externally-orchestrated-forward",
+            "operationContract": "meridian.object.read_range",
+            "operationVersions": [
+              "1.0.0"
+            ]
+          },
+          {
+            "cursorBehavior": "none",
+            "extensions": {
+              "catalog": "object",
+              "provider": "s3"
+            },
+            "guarantees": [],
+            "healthProbes": [
+              "authenticated",
+              "bucket-access"
+            ],
+            "limits": {},
+            "migrationBehavior": "externally-orchestrated-forward",
+            "operationContract": "meridian.object.stat",
+            "operationVersions": [
+              "1.0.0"
+            ]
+          }
+        ],
+        "driver": "boto3>=1.40,<2",
+        "supportedEngineVersions": {
+          "aws-s3": [
+            "2006-03-01"
+          ],
+          "s3-compatible": [
+            "2006-03-01"
+          ]
+        }
+      },
+      "engineProfile": "aws-s3",
+      "engineVersion": "2006-03-01",
+      "extensions": {
+        "adapterVersion": "1.0.3",
+        "coreVersion": "1.1.0",
+        "objectCommonVersion": "1.0.3",
+        "objectLockVerified": false,
+        "s3ApiContract": "2006-03-01",
+        "selectedServerVersion": "unlisted-server-build",
+        "versioningVerified": false
+      },
+      "formatVersion": "meridian-adapter-capabilities.v1"
+    }
+  },
+  {
+    "fingerprint": "sha256:b796500290e2c645bf75487a440353b62ed79cdc4ab09deb604cb6181b62b32b",
+    "manifest": {
+      "availableOperationContracts": [
+        "meridian.object.create_resource",
+        "meridian.object.delete",
+        "meridian.object.get",
+        "meridian.object.list",
+        "meridian.object.publish_schema",
+        "meridian.object.put",
+        "meridian.object.read_range",
+        "meridian.object.stat"
+      ],
+      "descriptor": {
+        "adapterContractVersion": "1.0.0",
+        "adapterId": "s3",
+        "capabilities": [
+          {
+            "cursorBehavior": "none",
+            "extensions": {
+              "catalog": "object",
+              "provider": "s3"
+            },
+            "guarantees": [],
+            "healthProbes": [
+              "authenticated",
+              "bucket-access"
+            ],
+            "limits": {},
+            "migrationBehavior": "externally-orchestrated-forward",
+            "operationContract": "meridian.object.create_resource",
+            "operationVersions": [
+              "1.0.0"
+            ]
+          },
+          {
+            "cursorBehavior": "none",
+            "extensions": {
+              "catalog": "object",
+              "provider": "s3"
+            },
+            "guarantees": [
+              "object.exact-version-delete"
+            ],
+            "healthProbes": [
+              "authenticated",
+              "bucket-access"
+            ],
+            "limits": {},
+            "migrationBehavior": "externally-orchestrated-forward",
+            "operationContract": "meridian.object.delete",
+            "operationVersions": [
+              "1.0.0"
+            ]
+          },
+          {
+            "cursorBehavior": "none",
+            "extensions": {
+              "catalog": "object",
+              "provider": "s3"
+            },
+            "guarantees": [
+              "object.digest-verification",
+              "object.streaming"
+            ],
+            "healthProbes": [
+              "authenticated",
+              "bucket-access"
+            ],
+            "limits": {},
+            "migrationBehavior": "externally-orchestrated-forward",
+            "operationContract": "meridian.object.get",
+            "operationVersions": [
+              "1.0.0"
+            ]
+          },
+          {
+            "cursorBehavior": "opaque-logical-start-after",
+            "extensions": {
+              "catalog": "object",
+              "provider": "s3"
+            },
+            "guarantees": [
+              "object.bounded-prefix-list"
+            ],
+            "healthProbes": [
+              "authenticated",
+              "bucket-access"
+            ],
+            "limits": {
+              "object.max-list-page-size": 1000
+            },
+            "migrationBehavior": "externally-orchestrated-forward",
+            "operationContract": "meridian.object.list",
+            "operationVersions": [
+              "1.0.0"
+            ]
+          },
+          {
+            "cursorBehavior": "none",
+            "extensions": {
+              "catalog": "object",
+              "provider": "s3"
+            },
+            "guarantees": [],
+            "healthProbes": [
+              "authenticated",
+              "bucket-access"
+            ],
+            "limits": {},
+            "migrationBehavior": "externally-orchestrated-forward",
+            "operationContract": "meridian.object.publish_schema",
+            "operationVersions": [
+              "1.0.0"
+            ]
+          },
+          {
+            "cursorBehavior": "none",
+            "extensions": {
+              "catalog": "object",
+              "provider": "s3"
+            },
+            "guarantees": [
+              "object.conditional-create",
+              "object.digest-sha256",
+              "object.digest-verification",
+              "object.immutability-intent",
+              "object.metadata-after-commit",
+              "object.multipart",
+              "object.retention-intent",
+              "object.streaming"
+            ],
+            "healthProbes": [
+              "authenticated",
+              "bucket-access"
+            ],
+            "limits": {
+              "object.max-multipart-part-bytes": 5368709120,
+              "object.max-multipart-parts": 10000,
+              "object.max-object-bytes": 5497558138880,
+              "object.max-user-metadata-entries": 128
+            },
+            "migrationBehavior": "externally-orchestrated-forward",
+            "operationContract": "meridian.object.put",
+            "operationVersions": [
+              "1.0.0"
+            ]
+          },
+          {
+            "cursorBehavior": "none",
+            "extensions": {
+              "catalog": "object",
+              "provider": "s3"
+            },
+            "guarantees": [
+              "object.digest-verification",
+              "object.range-read"
+            ],
+            "healthProbes": [
+              "authenticated",
+              "bucket-access"
+            ],
+            "limits": {
+              "object.max-range-bytes": 67108864
+            },
+            "migrationBehavior": "externally-orchestrated-forward",
+            "operationContract": "meridian.object.read_range",
+            "operationVersions": [
+              "1.0.0"
+            ]
+          },
+          {
+            "cursorBehavior": "none",
+            "extensions": {
+              "catalog": "object",
+              "provider": "s3"
+            },
+            "guarantees": [],
+            "healthProbes": [
+              "authenticated",
+              "bucket-access"
+            ],
+            "limits": {},
+            "migrationBehavior": "externally-orchestrated-forward",
+            "operationContract": "meridian.object.stat",
+            "operationVersions": [
+              "1.0.0"
+            ]
+          }
+        ],
+        "driver": "boto3>=1.40,<2",
+        "supportedEngineVersions": {
+          "aws-s3": [
+            "2006-03-01"
+          ],
+          "s3-compatible": [
+            "2006-03-01"
+          ]
+        }
+      },
+      "engineProfile": "s3-compatible",
+      "engineVersion": "2006-03-01",
+      "extensions": {
+        "adapterVersion": "1.0.3",
+        "coreVersion": "1.1.0",
+        "objectCommonVersion": "1.0.3",
+        "objectLockVerified": false,
+        "s3ApiContract": "2006-03-01",
+        "selectedServerVersion": "unlisted-server-build",
+        "versioningVerified": false
+      },
+      "formatVersion": "meridian-adapter-capabilities.v1"
+    }
+  }
+]

@@ -29,6 +29,7 @@ _ALLOWED_SETTINGS = frozenset(
         "region",
         "requireVersioning",
         "serverSideEncryption",
+        "selectedServerVersion",
         "spoolMemoryBytes",
         "verifyAfterWrite",
     }
@@ -116,6 +117,7 @@ class S3Config:
     max_attempts: int = 4
     engine_profile: str = "s3-compatible"
     engine_version: str = "2006-03-01"
+    selected_server_version: str | None = None
 
     def __post_init__(self) -> None:
         bucket = _bounded_string(self.bucket, "bucket", 255)
@@ -147,6 +149,12 @@ class S3Config:
             raise ValueError("addressing_style must be auto, path, or virtual")
         for name in ("region", "engine_profile", "engine_version"):
             object.__setattr__(self, name, _bounded_string(getattr(self, name), name, 256))
+        if self.engine_profile not in {"aws-s3", "s3-compatible"}:
+            raise ValueError("unsupported S3 engine profile")
+        if self.engine_version != "2006-03-01":
+            raise ValueError("S3 engine_version must identify the 2006-03-01 API contract")
+        if self.selected_server_version is not None:
+            _bounded_string(self.selected_server_version, "selected_server_version", 256)
         _integer(
             self.multipart_part_bytes,
             "multipart_part_bytes",
@@ -264,6 +272,7 @@ class S3Config:
             max_attempts=_integer(setting("maxAttempts", 4), "maxAttempts", 1, 20),
             engine_profile=binding.engine_profile,
             engine_version=binding.engine_version,
+            selected_server_version=cast(str | None, setting("selectedServerVersion", None)),
         )
 
 

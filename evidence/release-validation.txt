@@ -1,0 +1,4 @@
+# Exact tested public release closure; deployment selection remains independent.
+meridian-storage-core==1.1.0
+meridian-storage-semantics==2.0.1
+meridian-storage-object-common==1.0.3

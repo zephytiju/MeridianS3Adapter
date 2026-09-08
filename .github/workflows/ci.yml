@@ -27,7 +27,7 @@ jobs:
           python-version: "3.12"
           cache: pip
       - run: python -m pip install --upgrade pip
-      - run: python -m pip install -e ".[test]"
+      - run: python -m pip install -c evidence/release-validation.txt -e ".[test]"
       - run: python -m ruff check .
       - run: python -m ruff format --check .
       - run: python -m mypy src
@@ -54,7 +54,7 @@ jobs:
           python-version: ${{ matrix.python }}
           cache: pip
       - run: python -m pip install --upgrade pip
-      - run: python -m pip install -e ".[test]"
+      - run: python -m pip install -c evidence/release-validation.txt -e ".[test]"
       - run: python -m pytest -m "not integration" -q
 
   package:
@@ -75,17 +75,17 @@ jobs:
           diff -rq .build-a .build-b
       - name: Smoke-install the wheel and verify discovery
         run: |
-          python -m pip install --force-reinstall .build-a/*.whl
+          python -m pip install -c evidence/release-validation.txt --force-reinstall .build-a/*.whl
           python -m pip check
           python - <<'PY'
           from importlib.metadata import entry_points, version
           from meridian_storage.adapters.s3 import __version__
 
-          assert version("meridian-storage-s3") == "1.0.2"
-          assert __version__ == "1.0.2"
-          assert version("meridian-storage-object-common") == "1.0.2"
-          assert version("meridian-storage-core") == "1.0.1"
-          assert version("meridian-storage-semantics") == "2.0.0"
+          assert version("meridian-storage-s3") == "1.0.3"
+          assert __version__ == "1.0.3"
+          assert version("meridian-storage-object-common") == "1.0.3"
+          assert version("meridian-storage-core") == "1.1.0"
+          assert version("meridian-storage-semantics") == "2.0.1"
           selected = tuple(entry_points(group="meridian_storage.adapters", name="s3"))
           assert len(selected) == 1
           assert selected[0].load().adapter_id == "s3"
@@ -114,7 +114,10 @@ jobs:
           python-version: "3.12"
           cache: pip
       - run: python -m pip install --upgrade pip
-      - run: python -m pip install -e ".[test]"
+      - run: python -m pip install -c evidence/release-validation.txt -e ".[test]"
+      - run: python -m build
+      - run: python -m pip install -c evidence/release-validation.txt --force-reinstall dist/*.whl
+      - run: python -m pip check
       - name: Start immutable real S3-compatible engine
         run: |
           docker run --rm -d --name meridian-s3-minio \

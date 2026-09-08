@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+from importlib.metadata import version
+
 from meridian_storage.object_common import (
     GUARANTEE_BOUNDED_PREFIX_LIST,
     GUARANTEE_CONDITIONAL_CREATE,
@@ -127,7 +129,10 @@ def s3_capability_manifest(
         engine_version=config.engine_version,
         extensions={
             "adapterVersion": __version__,
-            "objectCommonVersion": "1.0.2",
+            "objectCommonVersion": version("meridian-storage-object-common"),
+            "coreVersion": version("meridian-storage-core"),
+            "s3ApiContract": config.engine_version,
+            "selectedServerVersion": config.selected_server_version,
             "objectLockVerified": object_lock_verified,
             "versioningVerified": versioning_verified,
         },

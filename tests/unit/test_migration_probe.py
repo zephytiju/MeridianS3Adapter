@@ -63,7 +63,10 @@ def test_probe_is_minimal_by_default_and_selectively_advertises_verified_feature
         signed_references=True,  # type: ignore[arg-type]
     ).run()
     assert locked_evidence.versioning_enabled
+    assert locked_probe.observed_engine_version is None
     assert locked_probe.evidence == {
+        "s3ApiContract": "2006-03-01",
+        "serverVersionObservation": "unavailable",
         "authenticated": "true",
         "bucketAccess": "verified",
         "checksumHeaders": "true",

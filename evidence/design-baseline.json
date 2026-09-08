@@ -3,18 +3,18 @@
     "adapterContractVersion": "1.0.0",
     "catalog": "object",
     "objectCommonDistribution": "meridian-storage-object-common",
-    "objectCommonVersion": "1.0.2",
-    "objectCommonWheelSha256": "26422de8bce6dcf5e1a3cbf12614ec85ab99384cfcd64da9d91717aa849a8f4d",
+    "objectCommonVersion": "1.0.3",
+    "objectCommonWheelSha256": "089012bebb00870a38b615e41c907454d418e7ddaffaf3d0f13db8bf1ea3e4a1",
     "operationVersion": "1.0.0"
   },
   "designRevisions": {
     "catalogsAndPublicInterfaces": 121,
     "engineAdapters": 24,
-    "meridianConstructsLld": 45,
+    "meridianConstructsLld": 112,
     "meridianHld": 114,
-    "objectAdapterLld": 35
+    "objectAdapterLld": 37
   },
-  "fingerprint": "sha256:0fb6e82e9f3496a95ef33cbca7c274060eefc34e1a7ec22ac2c7310f15dad8b7",
+  "fingerprint": "sha256:d23e710b77ec1901d9c840bf5312b24cb0e215785a7364570d581ca653534d1e",
   "formatVersion": "meridian.s3-design-baseline.v1",
   "scope": {
     "adapterId": "s3",

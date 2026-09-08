@@ -1,7 +1,7 @@
 # Meridian Storage S3
 
 `meridian-storage-s3` is the S3-compatible Object Adapter for Meridian V1. It implements
-the released `meridian-storage-object-common==1.0.2` contract behind the `s3` adapter id.
+the released `meridian-storage-object-common>=1.0.3,<2` contract behind the `s3` adapter id.
 Consumers continue to use mapping-first `object` Catalog Expressions; bucket names, keys,
 endpoints, credentials, SDK objects, retention controls, and migration state remain private to
 deployment composition and this adapter.
@@ -27,11 +27,11 @@ pre-signed URL. Those authorities remain with Platform or Vangu IaC.
 ## Installation
 
 ```bash
-python -m pip install meridian-storage-s3==1.0.2
+python -m pip install meridian-storage-s3==1.0.3
 ```
 
-Python 3.12 or newer is required. The package pins the released Object Common contract,
-resolving with Core 1.0.1 and Semantics 2.0.0. It is discovered through the
+Python 3.12 or newer is required. Public API bounds admit Core `>=1.1,<2` and Object Common `>=1.0.3,<2`.
+The exact tested closure is Core 1.1.0, Semantics 2.0.1, and Object Common 1.0.3. It is discovered through the
 `meridian_storage.adapters` entry-point group.
 
 ## Deployment configuration
@@ -48,6 +48,8 @@ are listed below; unknown settings fail closed.
   `allowInsecureHttp: true`; authenticated server TLS requires HTTPS plus resolved CA material.
   Mutual TLS is rejected because the boto3 transport cannot safely consume the Core client
   identity contract.
+- `selectedServerVersion` optionally records the deployment-selected storage software release.
+  It is bounded provenance, not a compatibility allowlist or a probe observation.
 - `region` defaults to `us-east-1`; `addressingStyle` is `auto`, `path`, or `virtual`.
 - `multipartThresholdBytes`, `multipartPartBytes`, `spoolMemoryBytes`,
   `integrityChunkBytes`, `maxObjectBytes`, `maxRangeBytes`, and `maxAttempts` are bounded before
@@ -107,3 +109,37 @@ consumer using that same default can upload and read through Meridian without
 registering a second S3 factory. Core intentionally rejects injecting `s3` again
 when its installed entry point is present. Explicit SPI compositions may still pass
 `S3AdapterFactory(payloads=registry)`; an empty registry is preserved by identity.
+
+## API contract and release provenance (1.0.3)
+
+For both `aws-s3` and `s3-compatible`, legacy `engineVersion` continues to mean
+S3 API `2006-03-01`. A storage software release belongs in the optional Binding
+setting `selectedServerVersion` (`S3Config.selected_server_version`), never in
+that protocol field. Unknown profiles and unsupported API contracts still fail.
+AWS-managed S3 need not provide a selectable storage-server software release.
+This package does not provision any provider or add a managed mode.
+
+`AdapterProbe.observed_engine_version` is `None`: standard authenticated S3
+operations do not identify server software releases. Configuration, API dates,
+and generic Server headers are not authenticated release observations. The
+manifest records installed Core/Object Common and adapter distribution releases,
+the API contract and the optional selected server release separately. Runtime
+result provenance labels the protocol and unavailable observation explicitly.
+
+The manifest keeps Core's v1 serialization with additive extension fields. Its
+canonical fingerprint therefore changes on upgrade or a selected release change;
+deployments must regenerate their expected manifest from their exact installed
+release closure. Physical schema fingerprints and the legacy protocol semantics
+are preserved. Old fingerprints are never accepted by ignoring mismatches.
+Deployment owns exact package/image locks and must verify their hashes; this
+adapter does not infer behavioral compatibility from equal release numbers.
+
+See [gate inventory](evidence/release-gates.md), [tested dependency coordinates](evidence/release-validation.txt)
+and [public artifact hashes](evidence/release-artifacts.json). Bounds express the
+consumed stable v1 Core SPI and Object APIs, not arbitrary future conformance.
+Unlisted release tests establish metadata behavior only. Real MinIO evidence
+covers exactly the committed image/closure; managed AWS S3, other S3 servers,
+virtual-hosted cloud endpoints and additional releases remain unverified.
+Existing Object/ConfigArtifact-facing payload, digest, immutability and metadata
+fixtures are unchanged; consuming ConfigArtifact release-closure integration is
+verified by the downstream owning-package task.

@@ -76,6 +76,10 @@ class S3AdapterSession:
                 "capabilityFingerprint": manifest.fingerprint,
                 "engineProfile": manifest.engine_profile,
                 "engineVersion": manifest.engine_version,
+                "s3ApiContract": manifest.engine_version,
+                "selectedServerVersion": self._runtime.config.selected_server_version
+                or "unavailable",
+                "observedServerVersion": "unavailable",
             },
         )
 
