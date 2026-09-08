@@ -81,8 +81,8 @@ jobs:
           from importlib.metadata import entry_points, version
           from meridian_storage.adapters.s3 import __version__
 
-          assert version("meridian-storage-s3") == "1.0.3"
-          assert __version__ == "1.0.3"
+          assert version("meridian-storage-s3") == "1.0.4"
+          assert __version__ == "1.0.4"
           assert version("meridian-storage-object-common") == "1.0.3"
           assert version("meridian-storage-core") == "1.1.0"
           assert version("meridian-storage-semantics") == "2.0.1"

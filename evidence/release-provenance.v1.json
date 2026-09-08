@@ -1,6 +1,6 @@
 [
   {
-    "fingerprint": "sha256:7145d1d61d2ea05036e6a5e00052a2837408e2c682d8c2ec59ec070815f432bc",
+    "fingerprint": "sha256:059876aaa1165da7a4bdd73ea30c54c91b5ccb2ba2d8ec5bd1003abd3e9ef26b",
     "manifest": {
       "availableOperationContracts": [
         "meridian.object.create_resource",
@@ -202,7 +202,7 @@
       "engineProfile": "aws-s3",
       "engineVersion": "2006-03-01",
       "extensions": {
-        "adapterVersion": "1.0.3",
+        "adapterVersion": "1.0.4",
         "coreVersion": "1.1.0",
         "objectCommonVersion": "1.0.3",
         "objectLockVerified": false,
@@ -214,7 +214,7 @@
     }
   },
   {
-    "fingerprint": "sha256:b796500290e2c645bf75487a440353b62ed79cdc4ab09deb604cb6181b62b32b",
+    "fingerprint": "sha256:a94d0997eb5d614dac93420ac227677840cbd8a0b6d0685274a4d9050c0dd925",
     "manifest": {
       "availableOperationContracts": [
         "meridian.object.create_resource",
@@ -416,7 +416,7 @@
       "engineProfile": "s3-compatible",
       "engineVersion": "2006-03-01",
       "extensions": {
-        "adapterVersion": "1.0.3",
+        "adapterVersion": "1.0.4",
         "coreVersion": "1.1.0",
         "objectCommonVersion": "1.0.3",
         "objectLockVerified": false,

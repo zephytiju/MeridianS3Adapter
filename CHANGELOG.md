@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.4
+
+- Derive SPDX package identity from project metadata and test release artifact hashes.
+- Correct the stale SBOM identity shipped with 1.0.3 without replacing published bytes.
+
 ## 1.0.3
 
 - Preserve the S3 API date separately from deployment-selected server releases and unavailable observations.
