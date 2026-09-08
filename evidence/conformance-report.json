@@ -54,7 +54,7 @@
     "observedServerRelease": null,
     "selectedRelease": "RELEASE.2025-04-22T22-12-26Z"
   },
-  "fingerprint": "sha256:dabf1638a39cfe308172528e187d6bbb1ad53a54dd6dbcab8bf71043c15104e4",
+  "fingerprint": "sha256:6665878446edde89d3c47e5684e39db3539ff0a6153e000272fcc3f13a210209",
   "formatVersion": "meridian.s3-conformance-evidence.v2",
   "objectCommon": {
     "checks": [
@@ -111,7 +111,7 @@
   },
   "package": {
     "name": "meridian-storage-s3",
-    "version": "1.0.3"
+    "version": "1.0.4"
   },
   "releaseClosure": {
     "meridian-storage-core": "1.1.0",

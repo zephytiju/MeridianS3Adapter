@@ -8,11 +8,15 @@ import argparse
 import hashlib
 import json
 import os
+import tomllib
 from datetime import UTC, datetime
 from pathlib import Path
 
-NAME = "meridian-storage-s3"
-VERSION = "1.0.2"
+PROJECT = tomllib.loads((Path(__file__).resolve().parents[1] / "pyproject.toml").read_text())[
+    "project"
+]
+NAME = PROJECT["name"]
+VERSION = PROJECT["version"]
 
 
 def sha256(path: Path) -> str:

@@ -27,7 +27,7 @@ pre-signed URL. Those authorities remain with Platform or Vangu IaC.
 ## Installation
 
 ```bash
-python -m pip install meridian-storage-s3==1.0.3
+python -m pip install meridian-storage-s3==1.0.4
 ```
 
 Python 3.12 or newer is required. Public API bounds admit Core `>=1.1,<2` and Object Common `>=1.0.3,<2`.
@@ -143,3 +143,7 @@ virtual-hosted cloud endpoints and additional releases remain unverified.
 Existing Object/ConfigArtifact-facing payload, digest, immutability and metadata
 fixtures are unchanged; consuming ConfigArtifact release-closure integration is
 verified by the downstream owning-package task.
+
+Release 1.0.4 corrects the 1.0.3 SBOM package identity: the generator reads owning
+project metadata and packaging tests verify its version and artifact hashes.
+The 1.0.3 package bytes remain immutable; consume 1.0.4 for the corrected SBOM.
